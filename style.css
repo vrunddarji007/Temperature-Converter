@@ -1,0 +1,362 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 630px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.thermometer {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 200px;
+    background: linear-gradient(to top, #2575fc 0%, #ff3c3c 100%);
+    border-radius: 20px;
+    border: 3px solid #333;
+    overflow: hidden;
+    transform: scale(0);
+    animation: scaleIn 0.6s 0.3s ease-in-out forwards;
+}
+
+@keyframes scaleIn {
+    to {
+        margin-top: 60px;
+        transform: scale(0.9,1.5);
+    }
+}
+
+.thermometer::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: #ff3c3c;
+    border-radius: 0 0 15px 15px;
+}
+
+.mercury {
+    position: absolute;
+    bottom: 20px;
+    left: 5px;
+    width: 30px;
+    height: 0;
+    background: linear-gradient(to top, #ff3c3c, #ff7b7b);
+    border-radius: 15px 15px 0 0;
+    transition: height 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+    font-weight: 700;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 10%;
+    width: 80%;
+    height: 3px;
+    background: linear-gradient(to right, transparent, #2575fc, transparent);
+    border-radius: 3px;
+}
+
+.input-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #444;
+    font-size: 1.1rem;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 15px 20px;
+    width: 90%;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 18px;
+    transition: all 0.3s;
+    background-color: #f9f9f9;
+}
+
+input[type="number"]:focus {
+    border-color: #2575fc;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.2);
+    transform: translateY(-2px);
+}
+
+.radio-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.radio-option {
+    flex: 1;
+    text-align: center;
+    perspective: 500px;
+}
+
+.radio-option input {
+    display: none;
+}
+
+.radio-option label {
+    display: block;
+    width: 75%;
+    padding: 10px 30px;
+    background: linear-gradient(145deg, #f0f0f0, #e0e0e0);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform-style: preserve-3d;
+    position: relative;
+    overflow: hidden;
+}
+
+.radio-option label::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s;
+}
+
+.radio-option label:hover::before {
+    left: 100%;
+}
+
+.radio-option input:checked + label {
+    background: linear-gradient(145deg, #2575fc, #1a68e8);
+    color: white;
+    transform: translateY(-5px) rotateX(10deg);
+    box-shadow: 0 10px 20px rgba(37, 117, 252, 0.3);
+}
+
+.radio-option label:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+button {
+    width: 90%;
+    padding: 16px;
+    background: linear-gradient(145deg, #2575fc, #1a68e8);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s;
+    box-shadow: 0 6px 10px rgba(37, 117, 252, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(37, 117, 252, 0.4);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 4px 8px rgba(37, 117, 252, 0.3);
+}
+
+.result {
+    text-align: center;
+    padding: 25px;
+    background: linear-gradient(145deg, #f9f9f9, #e8e8e8);
+    border-radius: 15px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    transform: scale(0.95);
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.result.show {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.result::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+}
+
+.converted-value {
+    font-size: 36px;
+    font-weight: 700;
+    color: #2575fc;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.converted-unit {
+    font-size: 20px;
+    color: #666;
+    font-weight: 500;
+}
+
+.error {
+    color: #e74c3c;
+    text-align: center;
+    margin-top: 15px;
+    font-weight: 500;
+    min-height: 24px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(231, 76, 60, 0.1);
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.error.show {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.instructions {
+    margin-top: 25px;
+    padding: 15px;
+    background: linear-gradient(145deg, #f0f7ff, #e0ecff);
+    border-radius: 10px;
+    font-size: 14px;
+    color: #555;
+    border-left: 4px solid #2575fc;
+    transform: translateX(-20px);
+    opacity: 0;
+    animation: slideIn 0.5s 0.5s ease-out forwards;
+}
+
+@keyframes slideIn {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.floating-element {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: float 15s infinite linear;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        transform: translateY(-1000px) rotate(720deg);
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
+    }
+    
+    .radio-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .thermometer {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin: 0 auto 20px;
+    }
+}
